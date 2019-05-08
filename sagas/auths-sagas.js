@@ -9,8 +9,8 @@ import { authsService } from '../services'
 import AuthsActions from '../redux/auths-redux'
 
 const AuthsSagas = {
-  *login({ data }) {
-    let response = yield call(authsService.login, data)
+  *login({ data, cookies }) {
+    let response = yield call(authsService.login, data, cookies)
     let responsedata = yield response.json()
     if (response.status < 400) {
       responsedata.login = true
@@ -21,8 +21,8 @@ const AuthsSagas = {
     }
   },
 
-  *forgotPassword({ data }) {
-    let response = yield call(authsService.forgotPassword, data)
+  *forgotPassword({ data, cookies }) {
+    let response = yield call(authsService.forgotPassword, data, cookies)
     let responsedata = yield response.json()
     if (response.status < 400) {
       responsedata.forgotPassword = true
@@ -32,8 +32,8 @@ const AuthsSagas = {
     }
   },
 
-  *resetPassword({ data }) {
-    let response = yield call(authsService.resetPassword, data)
+  *resetPassword({ data, cookies }) {
+    let response = yield call(authsService.resetPassword, data, cookies)
     let responsedata = yield response.json()
     if (response.status < 400) {
       responsedata.resetPassword = true

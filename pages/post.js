@@ -23,10 +23,9 @@ class Post extends Component {
       },
       tags: [
         "string"
-      ],
-      server_token: req? req.cookies.token : null
+      ]
     }
-    store.dispatch(AuthsActions.loginRequest(data))
+    store.dispatch(AuthsActions.loginRequest(data, req? req.cookies : null))
   }
 
   setToken = () => {

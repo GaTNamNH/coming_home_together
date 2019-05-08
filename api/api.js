@@ -13,42 +13,38 @@ export default class Api {
     this.preRequest = preRequest
   }
 
-  request(url, data, config) {
-    let token = data.server_token ? data.server_token : Cookies.get('token')
+  request(url, cookies, config) {
+    let token = cookies ? cookies.token : Cookies.get('token')
     config = this.preRequest(config, token)
     return fetch(apiConfig.BASE_URL + url, config)
   }
 
-  get(url, data, config) {
-    config = config || this.defaultConfig
-    config.url = url
+  get(url, cookies) {
+    let config = this.defaultConfig
     config.method = 'get'
-    return this.request(url, data, config)
+    return this.request(url, cookies, config)
   }
 
-  post(url, data, config) {
-    config = config || this.defaultConfig
-    config.url = url
+  post(url, data, cookies) {
+    let config = this.defaultConfig
     config.method = 'post'
     config.data = data
-    return this.request(url, data, config)
+    return this.request(url, cookies, config)
   }
 
-  put(url, data, config) {
-    config = config || this.defaultConfig
-    config.url = url
+  put(url, data, cookies) {
+    let config = this.defaultConfig
     config.method = 'put'
     config.data = data
 
-    return this.request(url, data, config)
+    return this.request(url, cookies, config)
   }
 
-  delete(url, data, config) {
-    config = config || this.defaultConfig
-    config.url = url
+  delete(url, data, cookies) {
+    let config = this.defaultConfig
     config.method = 'delete'
     config.data = data
 
-    return this.request(url, data, config)
+    return this.request(url, cookies, config)
   }
 }
