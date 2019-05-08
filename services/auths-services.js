@@ -2,7 +2,7 @@ import api from '../api'
 
 export default class AuthsService {
   login(data) {
-    return api.get(`/todos/1`)
+    return api.post(`/todos/v1/today/`, data)
   }
 
   forgotPassword(data) {

@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'next/router'
 import Layout from '../components/layout'
 import AuthsActions from '../redux/auths-redux'
+import { instanceOf } from 'prop-types'
+import { Cookies } from 'react-cookie'
 
 class Post extends Component {
   constructor(props) {
@@ -12,23 +14,43 @@ class Post extends Component {
     }
   }
 
-  static async getInitialProps({store}) {
-    let data = { username: 'admin', password: 'abc12345' }
+  static async getInitialProps({isServer, store, req}) {
+    if (isServer) {
+      console.log(req.cookies);
+    }
+    let data = {
+      subject: "string",
+      content: "string",
+      timer: "10:30",
+      category: {
+        title: "string"
+      },
+      tags: [
+        "string"
+      ]
+    }
     store.dispatch(AuthsActions.loginRequest(data))
+  }
+
+  setToken = () => {
+    let { cookies } = this.props
+    cookies.set('token', 'abcxyz1236545', {path: '/', httpOnly: true})
   }
 
   render() {
     return (
       <Layout>
         <h1>{this.props.router.query.title}</h1>
-        <h1>{this.props.data.title}</h1>
+        <h1>{this.props.data.data}</h1>
         <p>This is the blog post content.</p>
+        <button onClick={this.setToken}>show cookies</button>
       </Layout>
     )
   }
 }
 
 Post.propTypes = {
+  cookies: instanceOf(Cookies).isRequired,
   history: PropTypes.object,
   login: PropTypes.func,
   processing: PropTypes.bool,

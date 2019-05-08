@@ -14,17 +14,20 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^8.1.0",
     "next-redux-saga": "^4.0.1",
     "next-redux-wrapper": "^3.0.0-alpha.2",
     "react": "^16.8.6",
+    "react-cookie": "^3.1.2",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.0.2",
-    "reduxsauce": "^1.1.0"
+    "reduxsauce": "^1.1.0",
+    "universal-cookie-express": "^3.1.0"
   }
 }

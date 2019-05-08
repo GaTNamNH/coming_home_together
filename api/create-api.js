@@ -6,6 +6,7 @@
 import Api from './api'
 import config from '../config'
 import _ from 'lodash'
+import { Cookies } from 'react-cookie'
 
 export default () => {
   let apiDefaultConfig = {
@@ -22,11 +23,12 @@ export default () => {
 }
 
 const preRequest = (requestConfig) => {
-  // let extraHeaders = {}
-  // let token = localStorage.getItem('token')
-  // if (token) {
-  //      extraHeaders['Authorization'] = 'JWT ' + token
-  // }
-  // requestConfig.headers = _.assign(requestConfig.headers, extraHeaders)
+  let extraHeaders = {}
+  const cookies = new Cookies()
+  let token = cookies.get('token')
+  if (token) {
+    extraHeaders['Authorization'] = 'JWT ' + token
+  }
+  requestConfig.headers = _.assign(requestConfig.headers, extraHeaders)
   return requestConfig
 }
