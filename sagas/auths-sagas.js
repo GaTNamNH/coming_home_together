@@ -15,6 +15,7 @@ const AuthsSagas = {
       response.data.login = true
       yield put(AuthsActions.authsSuccess(response.data))
     } catch (err) {
+      console.log(err)
       yield put(AuthsActions.authsFailure(err))
     }
   },
