@@ -10,33 +10,36 @@ import AuthsActions from '../redux/auths-redux'
 
 const AuthsSagas = {
   *login({ data }) {
-    try {
-      let response = yield call(authsService.login, data)
-      response.data.login = true
-      yield put(AuthsActions.authsSuccess(response.data))
-    } catch (err) {
-      console.log(err)
-      yield put(AuthsActions.authsFailure(err))
+    let response = yield call(authsService.login, data)
+    let responsedata = yield response.json()
+    if (response.status < 400) {
+      responsedata.login = true
+      yield put(AuthsActions.authsSuccess(responsedata))
+    } else {
+      responsedata.status = response.status
+      yield put(AuthsActions.authsFailure(responsedata))
     }
   },
 
   *forgotPassword({ data }) {
-    try {
-      let response = yield call(authsService.forgotPassword, data)
-      response.data.forgotPassword = true
-      yield put(AuthsActions.authsSuccess(response.data))
-    } catch (err) {
-      yield put(AuthsActions.authsFailure(err))
+    let response = yield call(authsService.forgotPassword, data)
+    let responsedata = yield response.json()
+    if (response.status < 400) {
+      responsedata.forgotPassword = true
+      yield put(AuthsActions.authsSuccess(responsedata))
+    } else {
+      yield put(AuthsActions.authsFailure(responsedata))
     }
   },
 
   *resetPassword({ data }) {
-    try {
-      let response = yield call(authsService.resetPassword, data)
-      response.data.resetPassword = true
-      yield put(AuthsActions.authsSuccess(response.data))
-    } catch (err) {
-      yield put(AuthsActions.authsFailure(err))
+    let response = yield call(authsService.resetPassword, data)
+    let responsedata = yield response.json()
+    if (response.status < 400) {
+      responsedata.resetPassword = true
+      yield put(AuthsActions.authsSuccess(responsedata))
+    } else {
+      yield put(AuthsActions.authsFailure(responsedata))
     }
   }
 }

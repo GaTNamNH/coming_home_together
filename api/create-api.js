@@ -4,13 +4,9 @@
  */
 
 import Api from './api'
-import config from '../config'
-import Cookies from 'js-cookie'
 
 export default () => {
   let apiDefaultConfig = {
-    baseURL: config.BASE_URL,
-    timeout: config.API_TIMEOUT,
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -21,9 +17,8 @@ export default () => {
   return api
 }
 
-const preRequest = (requestConfig) => {
+const preRequest = (requestConfig, token) => {
   let extraHeaders = {}
-  let token = Cookies.get('token')
   if (token) {
     extraHeaders['Authorization'] = 'JWT ' + token
   }

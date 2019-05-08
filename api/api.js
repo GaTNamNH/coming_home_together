@@ -3,26 +3,27 @@
  * ApiClient to interact with api server
  */
 
-import axios from 'axios'
+import fetch from 'isomorphic-unfetch'
+import Cookies from 'js-cookie'
+import apiConfig from '../config'
 
-export default class ApiClient {
+export default class Api {
   constructor(defaultConfig, preRequest) {
     this.defaultConfig = defaultConfig
     this.preRequest = preRequest
   }
 
-  request(config) {
-    if (this.preRequest !== undefined) {
-      config = this.preRequest(config)
-    }
-    return axios.request(config)
+  request(url, data, config) {
+    let token = data.server_token ? data.server_token : Cookies.get('token')
+    config = this.preRequest(config, token)
+    return fetch(apiConfig.BASE_URL + url, config)
   }
 
-  get(url, config) {
+  get(url, data, config) {
     config = config || this.defaultConfig
     config.url = url
     config.method = 'get'
-    return this.request(config)
+    return this.request(url, data, config)
   }
 
   post(url, data, config) {
@@ -30,7 +31,7 @@ export default class ApiClient {
     config.url = url
     config.method = 'post'
     config.data = data
-    return this.request(config)
+    return this.request(url, data, config)
   }
 
   put(url, data, config) {
@@ -39,7 +40,7 @@ export default class ApiClient {
     config.method = 'put'
     config.data = data
 
-    return this.request(config)
+    return this.request(url, data, config)
   }
 
   delete(url, data, config) {
@@ -48,6 +49,6 @@ export default class ApiClient {
     config.method = 'delete'
     config.data = data
 
-    return this.request(config)
+    return this.request(url, data, config)
   }
 }
