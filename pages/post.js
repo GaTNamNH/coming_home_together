@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'next/router'
 import Layout from '../components/layout'
 import AuthsActions from '../redux/auths-redux'
-import { instanceOf } from 'prop-types'
-import { Cookies } from 'react-cookie'
+import Cookies from 'js-cookie'
 
 class Post extends Component {
   constructor(props) {
@@ -33,8 +32,9 @@ class Post extends Component {
   }
 
   setToken = () => {
-    let { cookies } = this.props
-    cookies.set('token', 'abcxyz1236545', {path: '/', httpOnly: true})
+    Cookies.set('token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im5hbW5oIiwiZXhwIjoxNTU3Mjk0MjkwLCJlbWFpbCI6Im5hbW5oQHlvcG1haWwuY29tIiwib3JpZ19pYXQiOjE1NTcyODM0OTB9.fiS_x2JQUlRFQJOAH8rp3xGYmaWk9PT6qItDChiwXn8',
+      {path: '/', abc: true}
+    )
   }
 
   render() {
@@ -50,7 +50,6 @@ class Post extends Component {
 }
 
 Post.propTypes = {
-  cookies: instanceOf(Cookies).isRequired,
   history: PropTypes.object,
   login: PropTypes.func,
   processing: PropTypes.bool,
