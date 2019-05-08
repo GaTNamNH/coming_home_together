@@ -15,7 +15,7 @@ class Post extends Component {
 
   static async getInitialProps({isServer, store, req}) {
     if (isServer) {
-      console.log(req.cookies);
+      console.log('cookie', req.cookies);
     }
     let data = {
       subject: "string",
@@ -33,7 +33,7 @@ class Post extends Component {
 
   setToken = () => {
     Cookies.set('token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im5hbW5oIiwiZXhwIjoxNTU3Mjk0MjkwLCJlbWFpbCI6Im5hbW5oQHlvcG1haWwuY29tIiwib3JpZ19pYXQiOjE1NTcyODM0OTB9.fiS_x2JQUlRFQJOAH8rp3xGYmaWk9PT6qItDChiwXn8',
-      {path: '/', abc: true}
+      {path: '/'}
     )
   }
 
