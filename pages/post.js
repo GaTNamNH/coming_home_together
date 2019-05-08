@@ -29,7 +29,7 @@ class Post extends Component {
   }
 
   setToken = () => {
-    Cookies.set('token', '1eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im5hbW5oIiwiZXhwIjoxNTU3MzExMzQ4LCJlbWFpbCI6Im5hbW5oQHlvcG1haWwuY29tIiwib3JpZ19pYXQiOjE1NTczMDA1NDh9.IA3bEb5sxR_KQpRKF4kJo_xMP1Drf_0QR6MKp9Ax_Dc',
+    Cookies.set('token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im5hbW5oIiwiZXhwIjoxNTU3MzExMzQ4LCJlbWFpbCI6Im5hbW5oQHlvcG1haWwuY29tIiwib3JpZ19pYXQiOjE1NTczMDA1NDh9.IA3bEb5sxR_KQpRKF4kJo_xMP1Drf_0QR6MKp9Ax_Dc',
       {path: '/'}
     )
   }
@@ -39,7 +39,7 @@ class Post extends Component {
       <Layout>
         <h1>{this.props.router.query.title}</h1>
         <h2>{this.props.data.data}</h2>
-        <h2>{this.props.error.detail}</h2>
+        <h2>{this.props.error && this.props.error.detail}</h2>
         <p>This is the blog post content.</p>
         <button onClick={this.setToken}>show cookies</button>
       </Layout>
