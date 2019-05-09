@@ -1,31 +1,21 @@
 import Layout from '../components/layout'
-import Link from 'next/link'
-import fetch from 'isomorphic-unfetch'
+import Head from 'next/head'
 
-const About = (props) => (
+const About = () => (
   <Layout>
+    <Head>
+      <title>About me</title>
+    </Head>
     <h1>Batman TV Shows</h1>
-    <ul>
-      {props.shows.map(show => (
-        <li key={show.id}>
-          <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
-            <a>{show.name}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <img src="/static/belle.jpg" />
+    <style jsx>
+      {`
+        img {
+          width: 200px;
+        }
+      `}
+    </style>
   </Layout>
 )
-
-About.getInitialProps = async function() {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
-  const data = await res.json()
-
-  console.log(`Show data fetched. Count: ${data.length}`)
-
-  return {
-    shows: data.map(entry => entry.show)
-  }
-}
 
 export default About

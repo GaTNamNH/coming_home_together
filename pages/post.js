@@ -5,6 +5,7 @@ import { withRouter } from 'next/router'
 import Layout from '../components/layout'
 import AuthsActions from '../redux/auths-redux'
 import Cookies from 'js-cookie'
+import Head from 'next/head'
 
 class Post extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Post extends Component {
     }
   }
 
-  static async getInitialProps({store, req}) {
+  static async getInitialProps({ store, req }) {
     let data = {
       subject: "string",
       content: "string",
@@ -25,18 +26,21 @@ class Post extends Component {
         "string"
       ]
     }
-    store.dispatch(AuthsActions.loginRequest(data, req? req.cookies : null))
+    store.dispatch(AuthsActions.loginRequest(data, req ? req.cookies : null))
   }
 
   setToken = () => {
     Cookies.set('token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im5hbW5oIiwiZXhwIjoxNTU3MzExMzQ4LCJlbWFpbCI6Im5hbW5oQHlvcG1haWwuY29tIiwib3JpZ19pYXQiOjE1NTczMDA1NDh9.IA3bEb5sxR_KQpRKF4kJo_xMP1Drf_0QR6MKp9Ax_Dc',
-      {path: '/'}
+      { path: '/' }
     )
   }
 
   render() {
     return (
       <Layout>
+        <Head>
+          <title>{this.props.router.query.title}</title>
+        </Head>
         <h1>{this.props.router.query.title}</h1>
         <h2>{this.props.data.data}</h2>
         <h2>{this.props.error && this.props.error.detail}</h2>
