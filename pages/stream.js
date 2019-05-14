@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { withRouter } from 'next/router'
 import Layout from '../components/layout'
+import AuthsActions from '../redux/auths-redux'
 import Head from 'next/head'
 
 class Stream extends Component {
@@ -10,6 +14,7 @@ class Stream extends Component {
     }
 
     componentDidMount() {
+
         let video = document.getElementById('video')
 
         navigator.getMedia = navigator.getUserMedia
@@ -33,6 +38,7 @@ class Stream extends Component {
     startRecording = () => {
         this.recorder = RecordRTC(this.stream, {
             type: 'video',
+            mimeType: 'video/mp4',
             recorderType: MediaStreamRecorder
         })
         this.recorder.startRecording()
@@ -41,7 +47,10 @@ class Stream extends Component {
     stopRecording = () => {
         this.recorder.stopRecording(() => {
             let blob = this.recorder.getBlob()
-            console.log(blob)
+            let file = new File([blob], 'uploaded-video.mp4')
+            let fd = new FormData()
+            fd.append('file', file)
+            this.props.upload(fd)
         });
     }
 
@@ -58,7 +67,7 @@ class Stream extends Component {
                 <style jsx>
                     {`
                         video {
-                            width: 200px;
+                            width: 300px;
                             height: 200px;
                         }
                     `}
@@ -68,4 +77,28 @@ class Stream extends Component {
     }
 }
 
-export default Stream
+Stream.propTypes = {
+    history: PropTypes.object,
+    login: PropTypes.func,
+    processing: PropTypes.bool,
+    data: PropTypes.object,
+    error: PropTypes.object,
+    shows: PropTypes.array
+}
+
+const mapStateToProps = state => {
+    return {
+        processing: state.auths.processing,
+        data: state.auths.data,
+        error: state.auths.error
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    upload: data => dispatch(AuthsActions.forgotPasswordRequest(data))
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(Stream))

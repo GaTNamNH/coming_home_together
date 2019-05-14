@@ -6,7 +6,7 @@ export default class AuthsService {
   }
 
   forgotPassword(data, cookies) {
-    return api.post(`/auths/v1/reset-request/`, data, cookies)
+    return api.post(`/file-managements/v1/upload/`, data, cookies)
   }
 
   resetPassword(data, cookies) {

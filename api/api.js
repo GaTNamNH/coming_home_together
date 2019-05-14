@@ -26,7 +26,7 @@ export default class Api {
 
   post(url, data, cookies) {
     this.defaultConfig.method = 'post'
-    this.defaultConfig.data = data
+    this.defaultConfig.body = data
     return this.request(url, cookies)
   }
 
