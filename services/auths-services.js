@@ -1,15 +1,19 @@
 import api from '../api'
 
 export default class AuthsService {
-  login(data, cookies) {
-    return api.post(`/todos/v1/today/`, data, cookies)
+  login(data) {
+    return api.post(`/auth/v1/login/`, data)
   }
 
-  forgotPassword(data, cookies) {
-    return api.post(`/file-managements/v1/upload/`, data, cookies)
+  forgotPassword(data) {
+    return api.post(`/auth/v1/forgot/`, data)
   }
 
-  resetPassword(data, cookies) {
-    return api.post(`/auths/v1/reset-with-key/${data.uidb64}/${data.token_key}/`, data, cookies)
+  resetPassword(data) {
+    return api.post(`/auth/v1/reset/`, data)
+  }
+
+  socialLogin(data) {
+    return api.post(`/social/v1/login/`, data)
   }
 }

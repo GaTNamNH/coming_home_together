@@ -9,8 +9,8 @@ import { authsService } from '../services'
 import AuthsActions from '../redux/auths-redux'
 
 const AuthsSagas = {
-  *login({ data, cookies }) {
-    let response = yield call(authsService.login, data, cookies)
+  *login({ data }) {
+    let response = yield call(authsService.login, data)
     let responsedata = yield response.json()
     if (response.status < 400) {
       responsedata.login = true
@@ -21,8 +21,8 @@ const AuthsSagas = {
     }
   },
 
-  *forgotPassword({ data, cookies }) {
-    let response = yield call(authsService.forgotPassword, data, cookies)
+  *forgotPassword({ data }) {
+    let response = yield call(authsService.forgotPassword, data)
     let responsedata = yield response.json()
     if (response.status < 400) {
       responsedata.forgotPassword = true
@@ -32,11 +32,22 @@ const AuthsSagas = {
     }
   },
 
-  *resetPassword({ data, cookies }) {
-    let response = yield call(authsService.resetPassword, data, cookies)
+  *resetPassword({ data }) {
+    let response = yield call(authsService.resetPassword, data)
     let responsedata = yield response.json()
     if (response.status < 400) {
       responsedata.resetPassword = true
+      yield put(AuthsActions.authsSuccess(responsedata))
+    } else {
+      yield put(AuthsActions.authsFailure(responsedata))
+    }
+  },
+
+  *socialLogin({ data }) {
+    let response = yield call(authsService.socialLogin, data)
+    let responsedata = yield response.json()
+    if (response.status < 400) {
+      responsedata.socialLogin = true
       yield put(AuthsActions.authsSuccess(responsedata))
     } else {
       yield put(AuthsActions.authsFailure(responsedata))

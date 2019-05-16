@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'next/router'
 import Layout from '../components/layout'
-import AuthsActions from '../redux/auths-redux'
 import Head from 'next/head'
 
 class Stream extends Component {
@@ -50,7 +49,7 @@ class Stream extends Component {
             let file = new File([blob], 'uploaded-video.mp4')
             let fd = new FormData()
             fd.append('file', file)
-            this.props.upload(fd)
+            //this.props.upload(fd)
         });
     }
 
@@ -78,24 +77,17 @@ class Stream extends Component {
 }
 
 Stream.propTypes = {
-    history: PropTypes.object,
-    login: PropTypes.func,
-    processing: PropTypes.bool,
-    data: PropTypes.object,
-    error: PropTypes.object,
-    shows: PropTypes.array
+    history: PropTypes.object
 }
 
 const mapStateToProps = state => {
     return {
-        processing: state.auths.processing,
-        data: state.auths.data,
-        error: state.auths.error
+        
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    upload: data => dispatch(AuthsActions.forgotPasswordRequest(data))
+    //upload: data => dispatch(an action)
 })
 
 export default connect(

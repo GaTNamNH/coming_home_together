@@ -2,9 +2,10 @@ import { createReducer, createActions } from 'reduxsauce'
 
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
-  loginRequest: ['data', 'cookies'],
-  forgotPasswordRequest: ['data', 'cookies'],
-  resetPasswordRequest: ['data', 'cookies'],
+  loginRequest: ['data'],
+  forgotPasswordRequest: ['data'],
+  resetPasswordRequest: ['data'],
+  socialLoginRequest: ['data'],
   authsSuccess: ['data'],
   authsFailure: ['error']
 })
@@ -37,6 +38,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_REQUEST]: request,
   [Types.FORGOT_PASSWORD_REQUEST]: request,
   [Types.RESET_PASSWORD_REQUEST]: request,
+  [Types.SOCIAL_LOGIN_REQUEST]: request,
   [Types.AUTHS_SUCCESS]: success,
   [Types.AUTHS_FAILURE]: failure
 })

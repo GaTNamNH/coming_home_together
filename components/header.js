@@ -15,6 +15,9 @@ const Header = () => (
         <Link href="/stream">
             <a style={linkStyle}>Stream</a>
         </Link>
+        <Link href="/login">
+            <a style={linkStyle}>Login</a>
+        </Link>
     </div>
 )
 

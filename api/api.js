@@ -26,19 +26,33 @@ export default class Api {
 
   post(url, data, cookies) {
     this.defaultConfig.method = 'post'
+    if (!(data instanceof FormData)) {
+      data = JSON.stringify(data)
+    }
     this.defaultConfig.body = data
     return this.request(url, cookies)
   }
 
   put(url, data, cookies) {
     this.defaultConfig.method = 'put'
-    this.defaultConfig.data = data
+    if (!(data instanceof FormData)) {
+      data = JSON.stringify(data)
+    }
+    this.defaultConfig.body = data
     return this.request(url, cookies)
   }
 
-  delete(url, data, cookies) {
+  patch(url, data, cookies) {
+    this.defaultConfig.method = 'patch'
+    if (!(data instanceof FormData)) {
+      data = JSON.stringify(data)
+    }
+    this.defaultConfig.body = data
+    return this.request(url, cookies)
+  }
+
+  delete(url, cookies) {
     this.defaultConfig.method = 'delete'
-    this.defaultConfig.data = data
     return this.request(url, cookies)
   }
 }
