@@ -14,7 +14,7 @@ export default class Api {
   }
 
   request(url, cookies) {
-    let token = cookies ? cookies.token : Cookies.get('token')
+    let token = cookies ? cookies.token : Cookies.get('token1')
     this.defaultConfig = this.preRequest(this.defaultConfig, token)
     return fetch(apiConfig.BASE_URL + url, this.defaultConfig)
   }
