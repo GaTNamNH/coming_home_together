@@ -8,7 +8,8 @@ import Api from './api'
 export default () => {
   let apiDefaultConfig = {
     headers: {
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     }
   }
 

@@ -20,6 +20,13 @@ class Login extends Component {
         })
     }
 
+    login = () => {
+        this.props.login({
+            username: 'admin',
+            password: '12345678@'
+        })
+    }
+
     render() {
         return (
             <Layout>
@@ -33,6 +40,7 @@ class Login extends Component {
                     callback={this.responseFacebook}
                     redirectUri="http://localhost:4000"
                 />
+                <button onClick={this.login}>login</button>
             </Layout>
         )
     }
@@ -55,7 +63,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    login: data => dispatch(AuthsActions.resetPasswordRequest(data))
+    login: data => dispatch(AuthsActions.loginRequest(data))
 })
 
 export default connect(

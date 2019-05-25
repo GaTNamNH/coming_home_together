@@ -2,7 +2,7 @@ import api from '../api'
 
 export default class AuthsService {
   login(data) {
-    return api.post(`/auth/v1/login/`, data)
+    return api.post(`/auths/v1/login/`, data)
   }
 
   forgotPassword(data) {
